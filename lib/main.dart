@@ -79,12 +79,12 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(15.0, 10.0, 50.0, 10.0),
-            child: Text(item.name,style: TextStyle(fontSize: 15),),
+            child: Text(item.name,style: TextStyle(fontSize: 20),),
           ),
           Container(
             child: SizedBox(
-              width: 50,
-              height: 25,
+              width: 85,
+              height: 30,
               child: TextField(
                 controller: TextEditingController(text: textcontrol[item.id]),
                 keyboardType: TextInputType.number,
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             'Getting your Data safely to from sheets...',
             style: TextStyle(
-                fontSize: 15,
+                fontSize: 20,
                 color: Colors.black,
                 fontWeight: FontWeight.w600
             ),
@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage> {
 
       children: <Widget>[
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Container(
             color: Colors.black87,
             child: SingleChildScrollView(
@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 20),
+                        textStyle: const TextStyle(fontSize: 40),
                         padding: const EdgeInsets.all(5.0),
                         primary: (currentwidget == "IN")? Colors.white : Colors.grey,
                       ),
@@ -291,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 20),
+                        textStyle: const TextStyle(fontSize: 40),
                         padding: const EdgeInsets.all(5.0),
                         primary: (currentwidget == "OUT") ? Colors.white : Colors.grey,
                       ),
@@ -313,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 20),
+                        textStyle: const TextStyle(fontSize: 40),
                         padding: const EdgeInsets.all(5.0),
                         primary: (currentwidget == "ENTRY")? Colors.white : Colors.grey,
                       ),
@@ -335,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       style: TextButton.styleFrom(
-                        textStyle: const TextStyle(fontSize: 20),
+                        textStyle: const TextStyle(fontSize: 40),
                         padding: const EdgeInsets.all(5.0),
                         primary: (currentwidget == "LIST")
                             ? Colors.white
@@ -405,52 +405,223 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getEditTable(){
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: IconButton(onPressed: (){
-              loadunload=[];
-              materialselected='None';
-              selectedemployeename='None';
-              currentwidget="ENTRY";
-              textcontrol={};
-              quantities={};
-              setState((){});
-              }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
-          ),
-          Expanded(
-            flex: 20,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children:const [
-                          Text(
-                              'IN',
-                              style: TextStyle(fontSize: 40),
-                          ),
-                          Text(
-                              'OUT',
-                              style: TextStyle(fontSize: 40),
-                          )
-                        ]
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/select.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: IconButton(onPressed: (){
+                loadunload=[];
+                materialselected='None';
+                selectedemployeename='None';
+                currentwidget="ENTRY";
+                textcontrol={};
+                quantities={};
+                setState((){});
+                }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size:40,)),
+            ),
+            Expanded(
+              flex: 20,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 250, 10, 30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children:const [
+                            Text(
+                                'IN',
+                                style: TextStyle(fontSize: 60),
+                            ),
+                            Text(
+                                'OUT',
+                                style: TextStyle(fontSize: 60),
+                            )
+                          ]
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
+                                    onPressed: ()async{
+                                      state='loading';
+                                      setState((){});
+                                      tablecolumndata=[
+                                        const DataColumn(label:Text('Edit')),
+                                        const DataColumn(
+                                            label: Text('Maida NB 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Maida NB 20Kg')),
+                                        const DataColumn(
+                                            label: Text('Maida DT 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Maida DT 20Kg')),
+                                        const DataColumn(
+                                            label: Text('Maida Special 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Maida Biscuit 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Suji DT 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Suji DT 20Kg')),
+                                        const DataColumn(
+                                            label: Text('Suji NB 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Suji NB 20Kg')),
+                                        const DataColumn(
+                                            label: Text('Fine Suji NB 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Atta Fine DT 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Bran Blod 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Bran F/SF 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Bran Chakki 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Chakki Atta DT 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Chakki Atta NB 50Kg')),
+                                        const DataColumn(
+                                            label: Text('Chakki Atta NB 20Kg'))
+                                      ];
+                                      tablerowdata = await instance.getDatabyName(selectedemployeename,'hall',todaysdate);
+//                                    print(tablerowdata);
+                                      state='done';
+                                      tempselectedit='hall';
+                                      currentwidget='entrytable';
+                                      setState((){});
+
+                                    },
+                                    child: const Text(
+                                      'Hall',
+                                      style: TextStyle(fontSize: 30),
+                                    ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
+                                  onPressed: ()async{
+                                    state='loading';
+                                    setState((){});
+                                    tablecolumndata=[
+                                      const DataColumn(label:Text('Edit')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida Special 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida Biscuit 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Fine Suji NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Atta Fine DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran Blod 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran F/SF 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran Chakki 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Bill Number'))
+                                    ];
+                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'loading',todaysdate);
+//                                  print(tablerowdata);
+                                    state='done';
+                                    tempselectedit='loading';
+                                    currentwidget='entrytableloading';
+                                    setState((){});
+
+                                  },
+                                  child: const Text(
+                                    'Loading',
+                                    style: TextStyle(fontSize: 30),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
+                                  onPressed: ()async{
+                                    state='loading';
+                                    setState((){});
+                                    tablecolumndata=[
+                                      const DataColumn(label:Text('Edit')),
+                                      const DataColumn(
+                                          label: Text('Bran Blod 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran F/SF 50Kg')),
+                                    ];
+                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'infilter',todaysdate);
+//                                  print(tablerowdata);
+                                    state='done';
+                                    tempselectedit='infilter';
+                                    currentwidget='entrytablefilterin';
+                                    setState((){});
+
+                                  },
+                                  child: const Text(
+                                    'Filter',
+                                    style: TextStyle(fontSize: 30),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
                                   onPressed: ()async{
                                     state='loading';
                                     setState((){});
@@ -492,307 +663,144 @@ class _HomePageState extends State<HomePage> {
                                           label: Text('Chakki Atta NB 50Kg')),
                                       const DataColumn(
                                           label: Text('Chakki Atta NB 20Kg'))
+
                                     ];
-                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'hall',todaysdate);
-//                                    print(tablerowdata);
+                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'filter',todaysdate);
+//                                  print(tablerowdata);
                                     state='done';
-                                    tempselectedit='hall';
+                                    tempselectedit='filter';
                                     currentwidget='entrytable';
                                     setState((){});
 
                                   },
                                   child: const Text(
-                                    'Hall',
-                                    style: TextStyle(fontSize: 20),
+                                    'Filter',
+                                    style: TextStyle(fontSize: 30),
                                   ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
-                                onPressed: ()async{
-                                  state='loading';
-                                  setState((){});
-                                  tablecolumndata=[
-                                    const DataColumn(label:Text('Edit')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Special 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Biscuit 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Fine Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Atta Fine DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Blod 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran F/SF 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Chakki 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Bill Number'))
-                                  ];
-                                  tablerowdata = await instance.getDatabyName(selectedemployeename,'loading',todaysdate);
-//                                  print(tablerowdata);
-                                  state='done';
-                                  tempselectedit='loading';
-                                  currentwidget='entrytableloading';
-                                  setState((){});
-
-                                },
-                                child: const Text(
-                                  'Loading',
-                                  style: TextStyle(fontSize: 20),
                                 ),
                               ),
                             ),
-                          ),
-                        ]
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
-                                onPressed: ()async{
-                                  state='loading';
-                                  setState((){});
-                                  tablecolumndata=[
-                                    const DataColumn(label:Text('Edit')),
-                                    const DataColumn(
-                                        label: Text('Bran Blod 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran F/SF 50Kg')),
-                                  ];
-                                  tablerowdata = await instance.getDatabyName(selectedemployeename,'infilter',todaysdate);
-//                                  print(tablerowdata);
-                                  state='done';
-                                  tempselectedit='infilter';
-                                  currentwidget='entrytablefilterin';
-                                  setState((){});
+                          ]
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
+                                  onPressed: ()async{
+                                    state='loading';
+                                    setState((){});
+                                    tablecolumndata=[
+                                      const DataColumn(label:Text('Edit')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida Special 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida Biscuit 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Fine Suji NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Atta Fine DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran Blod 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran F/SF 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Bran Chakki 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Chakki Atta NB 20Kg')),
 
-                                },
-                                child: const Text(
-                                  'Filter',
-                                  style: TextStyle(fontSize: 20),
+                                    ];
+                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'material returned',todaysdate);
+//                                  print(tablerowdata);
+                                    state='done';
+                                    tempselectedit='material returned';
+                                    currentwidget='entrytable';
+                                    setState((){});
+
+                                  },
+                                  child: const Text(
+                                    'Material Returned',
+                                    style: TextStyle(fontSize: 30),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
-                                onPressed: ()async{
-                                  state='loading';
-                                  setState((){});
-                                  tablecolumndata=[
-                                    const DataColumn(label:Text('Edit')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Special 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Biscuit 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Fine Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Atta Fine DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Blod 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran F/SF 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Chakki 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 20Kg'))
-
-                                  ];
-                                  tablerowdata = await instance.getDatabyName(selectedemployeename,'filter',todaysdate);
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                              child: SizedBox(
+                                width: 300.0,
+                                height: 55.0,
+                                child: ElevatedButton(
+                                  onPressed: ()async{
+                                    state='loading';
+                                    setState((){});
+                                    tablecolumndata=[
+                                      const DataColumn(label:Text('Edit')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida NB 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Maida DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji DT 20Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 50Kg')),
+                                      const DataColumn(
+                                          label: Text('Suji NB 20Kg')),
+                                    ];
+                                    tablerowdata = await instance.getDatabyName(selectedemployeename,'small pack',todaysdate);
 //                                  print(tablerowdata);
-                                  state='done';
-                                  tempselectedit='filter';
-                                  currentwidget='entrytable';
-                                  setState((){});
+                                    state='done';
+                                    tempselectedit='small pack';
+                                    currentwidget='entrytablesmallpack';
+                                    setState((){});
 
-                                },
-                                child: const Text(
-                                  'Filter',
-                                  style: TextStyle(fontSize: 20),
+                                  },
+                                  child: const Text(
+                                    'Small Pack',
+                                    style: TextStyle(fontSize: 30),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ]
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
-                                onPressed: ()async{
-                                  state='loading';
-                                  setState((){});
-                                  tablecolumndata=[
-                                    const DataColumn(label:Text('Edit')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Special 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida Biscuit 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Fine Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Atta Fine DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Blod 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran F/SF 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Bran Chakki 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Chakki Atta NB 20Kg')),
-
-                                  ];
-                                  tablerowdata = await instance.getDatabyName(selectedemployeename,'material returned',todaysdate);
-//                                  print(tablerowdata);
-                                  state='done';
-                                  tempselectedit='material returned';
-                                  currentwidget='entrytable';
-                                  setState((){});
-
-                                },
-                                child: const Text(
-                                  'Material Returned',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 200.0,
-                              height: 35.0,
-                              child: ElevatedButton(
-                                onPressed: ()async{
-                                  state='loading';
-                                  setState((){});
-                                  tablecolumndata=[
-                                    const DataColumn(label:Text('Edit')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida NB 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Maida DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji DT 20Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 50Kg')),
-                                    const DataColumn(
-                                        label: Text('Suji NB 20Kg')),
-                                  ];
-                                  tablerowdata = await instance.getDatabyName(selectedemployeename,'small pack',todaysdate);
-//                                  print(tablerowdata);
-                                  state='done';
-                                  tempselectedit='small pack';
-                                  currentwidget='entrytablesmallpack';
-                                  setState((){});
-
-                                },
-                                child: const Text(
-                                  'Small Pack',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]
-                    ),
-                  ],
+                          ]
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-          ),
-        ],
-      );
+            ),
+          ],
+        ),
+    );
   }
 
   Widget getLoadingDataW(){
@@ -806,7 +814,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             'Making Entry',
             style: TextStyle(
-                fontSize: 35,
+                fontSize: 55,
                 color: Colors.blueAccent,
                 fontWeight: FontWeight.w900
             ),
@@ -818,7 +826,7 @@ class _HomePageState extends State<HomePage> {
           child: Text(
             'Sending your Data safely to your sheets...',
             style: TextStyle(
-                fontSize: 15,
+                fontSize: 25,
                 color: Colors.black,
                 fontWeight: FontWeight.w600
             ),
@@ -853,7 +861,7 @@ class _HomePageState extends State<HomePage> {
             child: Text(
                 'AGRA ROLLER FLOUR MILL',
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 55,
                 color: Colors.blueAccent,
                 fontWeight: FontWeight.w900
               ),
@@ -865,7 +873,7 @@ class _HomePageState extends State<HomePage> {
             child: Text(
               'Getting your sheets ready...',
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 25,
                   color: Colors.black,
                   fontWeight: FontWeight.w600
               ),
@@ -903,33 +911,33 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 180.0),
                 child: Text(
                      currentwidget,
                   style: const TextStyle(
 //                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontSize: 60,
                   ),
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 30.0),
+                padding: EdgeInsets.fromLTRB(10.0, 15.0, 20.0, 5.0),
                 child: Text(
                   'Select Your Name',
                   style: TextStyle(
 //                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 40,
                   ),
                 ),
               ),
               DropdownButton<String>(
 
                   icon: const Icon(Icons.arrow_drop_down_outlined),
-                  iconSize: 25,
-                  elevation: 15,
+                  iconSize: 65,
+                  elevation: 35,
                   style: const TextStyle(color: Colors.blue),
                   underline: Container(
-                    height: 2,
+                    height: 5,
                     color: Colors.blueAccent,
                   ),
                   value: selectedemployeename,
@@ -938,7 +946,7 @@ class _HomePageState extends State<HomePage> {
                       value: name,
                       child: Text(
                         name,
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 30),
                       ),
                     );
                   }).toList(),
@@ -983,7 +991,7 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            flex: 1,
+            flex: 2,
             child: IconButton(onPressed: (){
               loadunload=[];
               selectedemployeename='None';
@@ -991,58 +999,58 @@ class _HomePageState extends State<HomePage> {
               textcontrol={};
               quantities={};
               setState((){});
-              }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+              }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
           ),
-          Expanded(     //cahnge in this
-            flex: 20,
+          Expanded(     //change in this
+            flex: 30,
             child: Column(
               children: [
                 Center(
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                        padding: const EdgeInsets.fromLTRB(0.0, 140.0, 0.0, 0.0),
                         child: Text(
                           INOUT,
-                          style: const TextStyle(fontSize: 40),
+                          style: const TextStyle(fontSize: 60),
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 30.0),
+                        padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 35.0),
                         child: Text(
                           'Select one the below options',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 40),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          width: 200.0,
-                          height: 35.0,
+                          width: 300.0,
+                          height: 55.0,
                           child: ElevatedButton(
                               onPressed: () async{
                                 materialselected=loadunload[0];
                                 textcontrol={'MN50':'','MN20':'','MD50':'','MD20':'','MS50':'','MB50':'','SD50':'','SD20':'','SN50':'','SN20':'','FSN50':'','AFD50':'','BB50':'','BF50':'','BC50':'','CAD50':'','CAN50':'','CAN20':''};
                                 quantities={'MN50':'0','MN20':'0','MD50':'0','MD20':'0','MS50':'0','MB50':'0','SD50':'0','SD20':'0','SN50':'0','SN20':'0','FSN50':'0','AFD50':'0','BB50':'0','BF50':'0','BC50':'0','CAD50':'0','CAN50':'0','CAN20':'0'};
                                 itemList=[
-                                  Item("MN50","Maida NB 50Kg             "),
+                                  Item("MN50","Maida NB 50Kg            "),
                                   Item("MN20","Maida NB 20Kg            "),
                                   Item("MD50","Maida DT 50Kg            "),
                                   Item("MD20","Maida DT 20Kg            "),
-                                  Item("MS50","Maida Special 50Kg   "),
-                                  Item("MB50","Maida Biscuit 50Kg    "),
-                                  Item("SD50","Suji DT 50Kg                "),
-                                  Item("SD20","Suji DT 20Kg               "),
-                                  Item("SN50","Suji NB 50Kg               "),
-                                  Item("SN20","Suji NB 20Kg             "),
-                                  Item("FSN50","Fine Suji NB 50Kg     "),
-                                  Item("AFD50","Atta Fine DT 50Kg    "),
-                                  Item("BB50","Bran Blod 50Kg         "),
-                                  Item("BF50","Bran F/SF 50Kg         "),
-                                  Item("BC50","Bran Chakki 50Kg     "),
-                                  Item("CAD50","Chakki Atta DT 50Kg"),
-                                  Item("CAN50","Chakki Atta NB 50Kg"),
-                                  Item("CAN20","Chakki Atta NB 20Kg"),
+                                  Item("MS50","Maida Special 50Kg    "),
+                                  Item("MB50","Maida Biscuit 50Kg     "),
+                                  Item("SD50","Suji DT 50Kg                 "),
+                                  Item("SD20","Suji DT 20Kg                 "),
+                                  Item("SN50","Suji NB 50Kg                 "),
+                                  Item("SN20","Suji NB 20Kg                "),
+                                  Item("FSN50","Fine Suji NB 50Kg       "),
+                                  Item("AFD50","Atta Fine DT 50Kg      "),
+                                  Item("BB50","Bran Blod 50Kg           "),
+                                  Item("BF50","Bran F/SF 50Kg          "),
+                                  Item("BC50","Bran Chakki 50Kg       "),
+                                  Item("CAD50","Chakki Atta DT 50Kg "),
+                                  Item("CAN50","Chakki Atta NB 50Kg "),
+                                  Item("CAN20","Chakki Atta NB 20Kg "),
                                 ];
                                 setState(() {
 
@@ -1050,7 +1058,7 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: Text(
                                 loadunload[0],
-                                style: const TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 30),
                               )
                           ),
                         ),
@@ -1058,8 +1066,8 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          width: 200.0,
-                          height: 35.0,
+                          width: 300.0,
+                          height: 55.0,
                           child: ElevatedButton(
                               onPressed: (){
                                 materialselected=loadunload[1];
@@ -1069,20 +1077,20 @@ class _HomePageState extends State<HomePage> {
                                   quantities={'Bold Bran':'0', 'Bran F/SF': '0'};
                                   itemList=[
                                     Item("Bold Bran",       "Bold Bran            "),
-                                    Item("Bran F/SF",       "Bran F/SF           "),
+                                    Item("Bran F/SF",       "Bran F/SF            "),
                                   ];
                                 }
                                 else if(loadunload[1]=="Filter"&&INOUT=="OUT"){
                                   textcontrol={'MN50':'','MN20':'','MD50':'','MD20':'','MS50':'','MB50':'','SD50':'','SD20':'','SN50':'','SN20':'','FSN50':'','AFD50':'','BB50':'','BF50':'','BC50':'','CAD50':'','CAN50':'','CAN20':''};
                                   quantities={'MN50':'0','MN20':'0','MD50':'0','MD20':'0','MS50':'0','MB50':'0','SD50':'0','SD20':'0','SN50':'0','SN20':'0','FSN50':'0','AFD50':'0','BB50':'0','BF50':'0','BC50':'0','CAD50':'0','CAN50':'0','CAN20':'0'};
                                   itemList=[
-                                    Item("MN50","Maida NB 50Kg             "),
-                                    Item("MN20","Maida NB 20Kg            "),
-                                    Item("MD50","Maida DT 50Kg            "),
-                                    Item("MD20","Maida DT 20Kg            "),
+                                    Item("MN50","Maida NB 50Kg           "),
+                                    Item("MN20","Maida NB 20Kg           "),
+                                    Item("MD50","Maida DT 50Kg           "),
+                                    Item("MD20","Maida DT 20Kg           "),
                                     Item("MS50","Maida Special 50Kg   "),
-                                    Item("MB50","Maida Biscuit 50Kg    "),
-                                    Item("SD50","Suji DT 50Kg                "),
+                                    Item("MB50","Maida Biscuit 50Kg   "),
+                                    Item("SD50","Suji DT 50Kg               "),
                                     Item("SD20","Suji DT 20Kg               "),
                                     Item("SN50","Suji NB 50Kg               "),
                                     Item("SN20","Suji NB 20Kg             "),
@@ -1101,7 +1109,7 @@ class _HomePageState extends State<HomePage> {
                               },
                               child: Text(
                                 loadunload[1],
-                                style: TextStyle(fontSize: 20),
+                                style: TextStyle(fontSize: 30),
                               )
                           ),
                         ),
@@ -1109,8 +1117,8 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          width: 200.0,
-                          height: 35.0,
+                          width: 300.0,
+                          height: 55.0,
                           child: ElevatedButton(
                               onPressed: (){
                                 materialselected=loadunload[2];
@@ -1119,8 +1127,8 @@ class _HomePageState extends State<HomePage> {
                                   textcontrol={'MN50':'','MN20':'','MD50':'','MD20':'','SD50':'','SD20':'','SN50':'','SN20':''};
                                   quantities={'MN50':'0','MN20':'0','MD50':'0','MD20':'0','SD50':'0','SD20':'0','SN50':'0','SN20':'0'};
                                   itemList=[
-                                    Item("MN50","Maida NB 50Kg             "),
-                                    Item("MN20","Maida NB 20Kg            "),
+                                    Item("MN50","Maida NB 50Kg            "),
+                                    Item("MN20","Maida NB 20Kg           "),
                                     Item("MD50","Maida DT 50Kg            "),
                                     Item("MD20","Maida DT 20Kg            "),
                                     Item("SD50","Suji DT 50Kg                "),
@@ -1133,13 +1141,13 @@ class _HomePageState extends State<HomePage> {
                                   textcontrol={'MN50':'','MN20':'','MD50':'','MD20':'','MS50':'','MB50':'','SD50':'','SD20':'','SN50':'','SN20':'','FSN50':'','AFD50':'','BB50':'','BF50':'','BC50':'','CAD50':'','CAN50':'','CAN20':''};
                                   quantities={'MN50':'0','MN20':'0','MD50':'0','MD20':'0','MS50':'0','MB50':'0','SD50':'0','SD20':'0','SN50':'0','SN20':'0','FSN50':'0','AFD50':'0','BB50':'0','BF50':'0','BC50':'0','CAD50':'0','CAN50':'0','CAN20':'0'};
                                   itemList=[
-                                    Item("MN50","Maida NB 50Kg             "),
-                                    Item("MN20","Maida NB 20Kg            "),
-                                    Item("MD50","Maida DT 50Kg            "),
-                                    Item("MD20","Maida DT 20Kg            "),
-                                    Item("MS50","Maida Special 50Kg   "),
-                                    Item("MB50","Maida Biscuit 50Kg    "),
-                                    Item("SD50","Suji DT 50Kg                "),
+                                    Item("MN50","Maida NB 50Kg          "),
+                                    Item("MN20","Maida NB 20Kg          "),
+                                    Item("MD50","Maida DT 50Kg           "),
+                                    Item("MD20","Maida DT 20Kg           "),
+                                    Item("MS50","Maida Special 50Kg  "),
+                                    Item("MB50","Maida Biscuit 50Kg   "),
+                                    Item("SD50","Suji DT 50Kg               "),
                                     Item("SD20","Suji DT 20Kg               "),
                                     Item("SN50","Suji NB 50Kg               "),
                                     Item("SN20","Suji NB 20Kg             "),
@@ -1158,7 +1166,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                               child: Text(
                                 loadunload[2],
-                                style: const TextStyle(fontSize: 20),
+                                style: const TextStyle(fontSize: 30),
                               )
                           ),
                         ),
@@ -1189,16 +1197,17 @@ class _HomePageState extends State<HomePage> {
                   itemList = [];
                   quantities = {};
                   setState(() {});
-                  }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+                  }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 5.0),
                   child: Text(
                     materialselected,
-                    style: const TextStyle(fontSize: 23),
+                    style: const TextStyle(fontSize: 50),
                   ),
                 ),
                 SizedBox(
-                  height: 170,
+                  height: 500,
+                  width: 1000,
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: itemList.length,
@@ -1213,7 +1222,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 5.0),
+              padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 5.0),
               child: ElevatedButton(onPressed: () async {
                   quantities['Employee']=selectedemployeename;
                   quantities['Timestamp']=todaysdate;
@@ -1286,7 +1295,12 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 },
-                  child: const Text("Submit")),
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                    child: Text("Submit",
+                        style: TextStyle(fontSize: 20)
+                    ),
+                  )),
             ),
           ],
         ),
@@ -1309,19 +1323,19 @@ class _HomePageState extends State<HomePage> {
                   itemList = [];
                   quantities = {};
                   setState(() {});
-                }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+                }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 5.0),
                   child: Text(
                     materialselected,
-                    style: const TextStyle(fontSize: 23),
+                    style: const TextStyle(fontSize: 50),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 5.0),
                   child: Row(
                     children: [
-                      const Text("Bill Number",style: TextStyle(fontSize: 15),),
+                      const Text("Bill Number",style: TextStyle(fontSize: 25),),
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: SizedBox(
@@ -1346,7 +1360,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 140,
+                  height: 500,
+                  width: 600,
                   child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: itemList.length,
@@ -1361,7 +1376,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
               child: ElevatedButton(onPressed: () async {
 //                'Maidi':'0', 'Suji': '0', 'Bran': '0', 'Chakki Atta': '0', 'Fine Atta': '0', 'Fine Suji': '0'
 
@@ -1479,7 +1494,12 @@ class _HomePageState extends State<HomePage> {
                 }
                 }
               }
-              , child: const Text("Submit")),
+              , child: const Padding(
+                padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+                child: Text("Submit",
+                  style: TextStyle(fontSize: 20),
+                    ),
+              )),
             ),
           ],
         ),
@@ -1500,17 +1520,17 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: <Widget>[
               const Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+                padding: EdgeInsets.fromLTRB(0.0, 75.0, 70.0, 70.0),
                 child: Text(
                     "Admin",
-                    style: TextStyle(fontSize: 40),
+                    style: TextStyle(fontSize: 65),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.fromLTRB(5.0, 5.0, 55.0, 7.0),
                 child: SizedBox(
-                  width: 250,
-                  height: 50,
+                  width: 300,
+                  height: 60,
                   child: Container(
                     child: TextField(
                       keyboardType: TextInputType.text,
@@ -1527,10 +1547,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.fromLTRB(5.0, 12.0, 55.0, 25.0),
                 child: SizedBox(
-                  width: 250,
-                  height: 50,
+                  width: 300,
+                  height: 60,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
                         onChanged: (text) {
@@ -1602,7 +1622,7 @@ class _HomePageState extends State<HomePage> {
             quantities = {};
             setState(() {});
             },
-              icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)
+              icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -1655,7 +1675,7 @@ class _HomePageState extends State<HomePage> {
             currentwidget="edittable";
             quantities = {};
             setState(() {});
-            }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+            }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // Data table widget in not scrollable so we have to wrap it in a scroll view when we have a large data set..
@@ -1741,7 +1761,7 @@ class _HomePageState extends State<HomePage> {
             currentwidget="edittable";
             quantities = {};
             setState(() {});
-            }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+            }, icon: Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             // Data table widget in not scrollable so we have to wrap it in a scroll view when we have a large data set..
@@ -1808,7 +1828,7 @@ class _HomePageState extends State<HomePage> {
             currentwidget="edittable";
             quantities = {};
             setState(() {});
-            }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+            }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
 
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -1904,10 +1924,10 @@ class _HomePageState extends State<HomePage> {
               textcontrol={};
               quantities={};
               setState((){});
-            }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,)),
+            }, icon: const Icon(Icons.arrow_back_outlined,color: Colors.blue,size: 40,)),
             const Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Current Stock',style: TextStyle(fontSize: 25),),
+              child: Text('Current Stock',style: TextStyle(fontSize: 50),),
             ),
           ],
         ),
@@ -1919,15 +1939,15 @@ class _HomePageState extends State<HomePage> {
             children: const [
               Padding(
                 padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                child: Text('Sno',style: TextStyle(fontSize: 20),),
+                child: Text('Sno',style: TextStyle(fontSize: 30),),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                child: Text('Products',style: TextStyle(fontSize: 20),),
+                child: Text('Products',style: TextStyle(fontSize: 30),),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
-                child: Text('Running Balance',style: TextStyle(fontSize: 20),),
+                child: Text('Running Balance',style: TextStyle(fontSize: 30),),
               )
             ],
           ),
