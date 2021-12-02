@@ -1380,7 +1380,7 @@ class _HomePageState extends State<HomePage> {
               child: ElevatedButton(onPressed: () async {
 //                'Maidi':'0', 'Suji': '0', 'Bran': '0', 'Chakki Atta': '0', 'Fine Atta': '0', 'Fine Suji': '0'
 
-                if(quantities['Bill Number']==null) {
+                if(quantities['Bill Number']==null||quantities['Bill Number']=="") {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
