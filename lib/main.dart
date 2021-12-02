@@ -1553,6 +1553,9 @@ class _HomePageState extends State<HomePage> {
                   height: 60,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
                         onChanged: (text) {
                           login['password']=text;
                         },
